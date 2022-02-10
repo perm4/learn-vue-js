@@ -1,30 +1,30 @@
 <template>
   <div>
-    <app-header></app-header>
-    <button v-on:click="fetchData">get data</button>
+    <!-- <app-header v-bind:props 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
+    <app-header
+      v-bind:propsData="str"
+      v-on:renew="renewStr"></app-header>
   </div>
 </template>
 
 <script>
+// camelCase
+// kebab-case
+// PascalCase
+// snake_case
 import AppHeader from './components/AppHeader.vue';
-import axios from 'axios';
 export default {
   data: function() {
     return {
-      str: 'hi'
+      str: 'Header',
     }
   },
   components: {
     'app-header': AppHeader,
   },
   methods: {
-    fetchData: function() {
-      axios.get('http://localhost:8080/baseinfo/feeInfo.do')
-      .then(function(response) {
-        console.log(response);
-      }).catch(function(error) {
-        console.log(error);
-      });
+    renewStr: function(newValue) {
+      this.str = newValue;
     },
   },
 }
